@@ -4,6 +4,18 @@ const fs = require('fs');
 
 // TODO: Create an array of questions for user input
 const questions = [
+    //Email
+    {
+        type: 'input',
+        name: 'email',
+        message: 'What is your email address?'
+    },
+    //GitHub Username
+    {
+        type: 'input',
+        name: 'github',
+        message: 'What is your GitHub username?'
+    },
     //Title of Project
     {
         type: 'input',
@@ -17,6 +29,8 @@ const questions = [
         message: 'Please describe your project, i.e. what was the motivation, why did you build it, what, if any, problems does it solve, what did you learn?',
     },
     //Table of Contents -> generated in write file
+    //links jump to correct section
+    
     //Instalation
     {
         type: 'list',
@@ -88,9 +102,54 @@ const questions = [
         }
     },
     //License
+    {
+        type: 'list',
+        name: 'license_need_choice',
+        message: 'Does your application require a License?',
+        choices: ['yes', 'no'],
+    },
+    {
+        type: "list",
+        name: "license_choice",
+        message: "What License is required?",
+        choices: [
+            new inquirer.Separator(" = Licenses = "),
+            'GNU AGPLv3',
+            'GNU GPLv3',
+            'GNU LGPLv3',
+            'Mozilla Public License 2.0',
+            'Apache License 2.0',
+            'MIT License',
+            'Boost Software License 1.0',
+            'The Unlicense',
+        ], 
+        when(answers){
+            return answers.license_need_choice === 'yes'
+        }
+    },
     //Contributing
+    {
+        type: "input",
+        name: "contribution",
+        message: "Is there anything the user should know about contributing to the repo or application", 
+    },
     //Tests
-    //Questions (FAQ?)
+    {
+        type: "list",
+        name: "test_choice",
+        message: "Are the any tests of the application?",
+        choices: ['yes', 'no'], 
+    },
+    {
+        type: 'input',
+        name: 'tests',
+        message: 'What are the tests that can be run?',
+        when(answers){
+            return answers.test_choice === 'yes'
+        }
+    },
+    //Questions (instructions for how to reach creator)
+    
 ];
 
 // TODO: Create a function to write README file
