@@ -89,7 +89,46 @@ ${renderLicenseBadge(answers)}`;
 function generateMarkdown(answers) {
   console.log(answers.project_title);
   return `# ${answers.project_title}
+## Description
 
+${answers.project_description}
+
+##Table of Contents
+
+-[Installation](#installation)
+-[Usage](#usage)
+-[Contributing](#contributing)
+-[Tests](#tests)
+-[Questions](#questions)
+-[License](#license)
+
+##Installation
+
+The following is required to install the program.
+${install_command}
+
+## Usage
+
+${ussage}
+
+Usage Images:
+
+![alt text](${usage_img_link})
+![alt text](${usage_img2_link})
+![alt text](${usage_img3_link})
+
+## Contributing
+
+${contribution}
+
+## Tests
+
+${tests}
+
+## Questions
+
+For questions please check [my GitHub](https://github.com/${github})
+or reach out via email at <${email}>
 `;
 };
 
