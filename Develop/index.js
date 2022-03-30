@@ -36,20 +36,20 @@ const questions = [
     //Table of Contents -> generated in write file
     //links jump to correct section
 
-    //Instalation
+    //Installation
     {
         type: 'list',
-        name: 'instalation_require',
-        message: 'Does your project require specific instalation steps?',
+        name: 'installation_require',
+        message: 'Does your project require specific installation steps?',
         choices: ['yes', 'no'],
     },
     {
         type: 'input',
-        name: 'instal_command',
+        name: 'install_command',
         message: 'What commands does your project require to be run?',
         default: 'npm i',
         when(answers){
-            return answers.instalation_require === 'yes'
+            return answers.installation_require === 'yes'
         }
     },
     //Usage
@@ -158,7 +158,7 @@ const questions = [
 ];
 // TODO: Create a function to write README file
 function writeToFile(filename, answers) {
-    generateMarkdown(answers);
+    const readme = generateMarkdown(answers);
     renderLicenseBadge(answers);
     renderLicenseLink(answers);
     const license = renderLicenseSection(answers);
