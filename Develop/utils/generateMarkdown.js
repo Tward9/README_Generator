@@ -32,17 +32,58 @@ function renderLicenseBadge(answers) {
         break;
     }
   };
-  console.log(response);
   return response;
 };
 
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
-function renderLicenseLink(license_choice) { }
+function renderLicenseLink(answers) {
+  if (typeof answers.license_choice === 'string') {
+    switch (answers.license_choice) {
+      case 'GNU AGPLv3':
+        response = '[GNU AGPLv3](https://www.gnu.org/licenses/agpl-3.0)'
+        break;
+      case 'GNU GPLv3':
+        response = '[GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0)'
+        break;
+      case 'GNU LGPLv3':
+        response = '[GNU LGPLv3](https://www.gnu.org/licenses/lgpl-3.0)'
+        break;
+      case 'Mozilla Public License 2.0':
+        response = '[Mozilla Public License 2.0)](https://opensource.org/licenses/MPL-2.0)'
+        break;
+      case 'Apache License 2.0':
+        response = '[Apache License 2.0](https://opensource.org/licenses/Apache-2.0)'
+        break;
+      case 'MIT License':
+        response = '[MIT License](https://opensource.org/licenses/MIT)'
+        break;
+      case 'Boost Software License 1.0':
+        response = '[Boost Software License 1.0)](https://www.boost.org/LICENSE_1_0.txt)'
+        break;
+      case 'The Unlicense':
+        response = '[The Unlicense](http://unlicense.org/)'
+        break;
+      default:
+        response = ''
+        break;
+    }
+  };
+  return response;
+};
 
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderLicenseSection(license_choice) { }
+function renderLicenseSection(answers) {
+  if (answers.license_need_choice === 'yes') {
+    return `## License
+${renderLicenseLink(answers)}
+## Badges
+${renderLicenseBadge(answers)}`;
+  }else{
+    return '';
+  };
+};
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(answers) {
@@ -50,7 +91,9 @@ function generateMarkdown(answers) {
   return `# ${answers.project_title}
 
 `;
-}
+};
 
 module.exports = generateMarkdown;
 module.exports = renderLicenseBadge;
+module.exports = renderLicenseLink;
+module.exports = renderLicenseSection;

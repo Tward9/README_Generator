@@ -3,6 +3,9 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 const generateMarkdown = require('./utils/generateMarkdown');
 const renderLicenseBadge = require('./utils/generateMarkdown');
+const renderLicenseLink = require('./utils/generateMarkdown');
+const renderLicenseSection = require('./utils/generateMarkdown');
+
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -157,7 +160,8 @@ const questions = [
 function writeToFile(filename, answers) {
     generateMarkdown(answers);
     renderLicenseBadge(answers);
-   
+    renderLicenseLink(answers);
+    const license = renderLicenseSection(answers);
 }
 //todo: create readme draft to fill with answers
 // set up license info
