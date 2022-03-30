@@ -52,6 +52,7 @@ function renderLicenseSection(license_choice) {}
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(answers) {
+  console.log(answers.project_title);
   return `# ${answers.project_title}
 
 `;
