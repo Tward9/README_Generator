@@ -31,6 +31,9 @@ function renderLicenseBadge(answers) {
         response = ''
         break;
     }
+  }else {
+    response = '';
+    return response;
   };
   return response;
 };
@@ -68,6 +71,9 @@ function renderLicenseLink(answers) {
         response = ''
         break;
     }
+  }else {
+    response = '';
+    return response;
   };
   return response;
 };
@@ -76,9 +82,9 @@ function renderLicenseLink(answers) {
 // If there is no license, return an empty string
 function renderLicenseSection(answers) {
   if (answers.license_need_choice === 'yes') {
-    return `## License
-${renderLicenseLink(answers)}
-## Badges
+    return `## License 
+${renderLicenseLink(answers)} 
+## Badges 
 ${renderLicenseBadge(answers)}`;
   } else {
     return '';
@@ -89,49 +95,51 @@ ${renderLicenseBadge(answers)}`;
 function generateMarkdown(answers) {
   renderLicenseBadge(answers);
   renderLicenseLink(answers);
-  const license = renderLicenseSection(answers);
-  const readME = `# ${answers.project_title}
-  ## Description
+  let license = renderLicenseSection(answers);
+  let readME = `# ${answers.project_title}
+## Description
 
-  ${answers.project_description}
+${answers.project_description}
 
-  ## Table of Contents
+## Table of Contents
 
-  -[Installation](#installation)
-  -[Usage](#usage)
-  -[Contributing](#contributing)
-  -[Tests](#tests)
-  -[Questions](#questions)
-  -[License](#license)
+-[Installation](#installation)  
+-[Usage](#usage)  
+-[Contributing](#contributing)  
+-[Tests](#tests)  
+-[Questions](#questions)  
+-[License](#license)  
 
-  ## Installation
+## Installation
 
-  The following is required to install the program.
-  ${answers.install_command}
+The following is required to install the program.  
+${answers.install_command}
 
-  ## Usage
+## Usage
+To run, do the following:   
+${answers.usage}
 
-  ${answers.usage}
+Usage Images:
 
-  Usage Images:
+![alt text](${answers.usage_img_link})  
+![alt text](${answers.usage_img2_link})  
+![alt text](${answers.usage_img3_link})  
 
-  ![alt text](${answers.usage_img_link})
-  ![alt text](${answers.usage_img2_link})
-  ![alt text](${answers.usage_img3_link})
+## Contributing
 
-  ## Contributing
+${answers.contribution}
 
-  ${answers.contribution}
+## Tests
 
-  ## Tests
+To test, run the following  
+${answers.tests}
 
-  ${answers.tests}
+## Questions
 
-  ## Questions
-
-  For questions please check [my GitHub](https://github.com/${answers.github})
-  or reach out via email at <${answers.email}>
-  `;
+For questions please check [my GitHub](https://github.com/${answers.github})
+or reach out via email at <${answers.email}>
+`;
+  readME += license;
   return readME;
 };
 

@@ -100,7 +100,7 @@ const questions = [
     },
     {
         type: "input",
-        name: "usage_img2_link",
+        name: "usage_img3_link",
         message: "Provide a relative path link to your image",
         when(answers) {
             return answers.usage_pic3_choice === 'yes'
@@ -167,6 +167,7 @@ function writeToFile(answers) {
 function init() {
     inquirer.prompt(questions).then((answers) => {
         writeToFile(answers);
+        console.log(answers);
     });
 
 };
