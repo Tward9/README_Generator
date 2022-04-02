@@ -1,10 +1,10 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+// const renderLicenseBadge = require('./utils/generateMarkdown');
+// const renderLicenseLink = require('./utils/generateMarkdown');
+// const renderLicenseSection = require('./utils/generateMarkdown');
 const generateMarkdown = require('./utils/generateMarkdown');
-const renderLicenseBadge = require('./utils/generateMarkdown');
-const renderLicenseLink = require('./utils/generateMarkdown');
-const renderLicenseSection = require('./utils/generateMarkdown');
 
 
 // TODO: Create an array of questions for user input
@@ -48,7 +48,7 @@ const questions = [
         name: 'install_command',
         message: 'What commands does your project require to be run?',
         default: 'npm i',
-        when(answers){
+        when(answers) {
             return answers.installation_require === 'yes'
         }
     },
@@ -67,8 +67,8 @@ const questions = [
     {
         type: "input",
         name: "usage_img_link",
-        message: "Provide a relative path link to your image", 
-        when(answers){
+        message: "Provide a relative path link to your image",
+        when(answers) {
             return answers.usage_pic_choice === 'yes'
         }
     },
@@ -77,15 +77,15 @@ const questions = [
         name: 'usage_pic2_choice',
         message: 'Do you want to include another image?',
         choices: ['yes', 'no'],
-        when(answers){
+        when(answers) {
             return answers.usage_pic_choice === 'yes'
         }
     },
     {
         type: "input",
         name: "usage_img2_link",
-        message: "Provide a relative path link to your image", 
-        when(answers){
+        message: "Provide a relative path link to your image",
+        when(answers) {
             return answers.usage_pic2_choice === 'yes'
         }
     },
@@ -94,15 +94,15 @@ const questions = [
         name: 'usage_pic3_choice',
         message: 'Do you want to include another image?',
         choices: ['yes', 'no'],
-        when(answers){
+        when(answers) {
             return answers.usage_pic2_choice === 'yes'
         }
     },
     {
         type: "input",
         name: "usage_img2_link",
-        message: "Provide a relative path link to your image", 
-        when(answers){
+        message: "Provide a relative path link to your image",
+        when(answers) {
             return answers.usage_pic3_choice === 'yes'
         }
     },
@@ -127,8 +127,8 @@ const questions = [
             'MIT License',
             'Boost Software License 1.0',
             'The Unlicense',
-        ], 
-        when(answers){
+        ],
+        when(answers) {
             return answers.license_need_choice === 'yes'
         }
     },
@@ -136,43 +136,37 @@ const questions = [
     {
         type: "input",
         name: "contribution",
-        message: "Is there anything the user should know about contributing to the repo or application", 
+        message: "Is there anything the user should know about contributing to the repo or application",
     },
     //Tests
     {
         type: "list",
         name: "test_choice",
-        message: "Are the any tests of the application?",
-        choices: ['yes', 'no'], 
+        message: "Are there any tests of the application?",
+        choices: ['yes', 'no'],
     },
     {
         type: 'input',
         name: 'tests',
         message: 'What are the tests that can be run?',
-        when(answers){
+        when(answers) {
             return answers.test_choice === 'yes'
         }
     },
     //Questions (instructions for how to reach creator)
-    
+
 ];
 // TODO: Create a function to write README file
-function writeToFile(filename, answers) {
+function writeToFile(answers) {
     const readme = generateMarkdown(answers);
-    renderLicenseBadge(answers);
-    renderLicenseLink(answers);
-    const license = renderLicenseSection(answers);
-}
-//todo: create readme draft to fill with answers
-// set up license info
-//run fs.writeFile inside
+    filename = `${answers.project_title}.README.md`;
+    fs.writeFile(filename, readme, (err) => err ? console.error(err) : console.log('README file created'));
+};
 
 // TODO: Create a function to initialize app
 function init() {
-    inquirer.prompt(questions).then((answers)=>{
-        console.log(answers);
-        filename = `${answers.project_title}.README.md`;
-        writeToFile(filename, answers);
+    inquirer.prompt(questions).then((answers) => {
+        writeToFile(answers);
     });
 
 };

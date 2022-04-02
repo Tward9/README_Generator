@@ -80,59 +80,62 @@ function renderLicenseSection(answers) {
 ${renderLicenseLink(answers)}
 ## Badges
 ${renderLicenseBadge(answers)}`;
-  }else{
+  } else {
     return '';
   };
 };
 
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(answers) {
-  console.log(answers.project_title);
-  return `# ${answers.project_title}
-## Description
+  renderLicenseBadge(answers);
+  renderLicenseLink(answers);
+  const license = renderLicenseSection(answers);
+  const readME = `# ${answers.project_title}
+  ## Description
 
-${answers.project_description}
+  ${answers.project_description}
 
-##Table of Contents
+  ## Table of Contents
 
--[Installation](#installation)
--[Usage](#usage)
--[Contributing](#contributing)
--[Tests](#tests)
--[Questions](#questions)
--[License](#license)
+  -[Installation](#installation)
+  -[Usage](#usage)
+  -[Contributing](#contributing)
+  -[Tests](#tests)
+  -[Questions](#questions)
+  -[License](#license)
 
-##Installation
+  ## Installation
 
-The following is required to install the program.
-${install_command}
+  The following is required to install the program.
+  ${answers.install_command}
 
-## Usage
+  ## Usage
 
-${ussage}
+  ${answers.usage}
 
-Usage Images:
+  Usage Images:
 
-![alt text](${usage_img_link})
-![alt text](${usage_img2_link})
-![alt text](${usage_img3_link})
+  ![alt text](${answers.usage_img_link})
+  ![alt text](${answers.usage_img2_link})
+  ![alt text](${answers.usage_img3_link})
 
-## Contributing
+  ## Contributing
 
-${contribution}
+  ${answers.contribution}
 
-## Tests
+  ## Tests
 
-${tests}
+  ${answers.tests}
 
-## Questions
+  ## Questions
 
-For questions please check [my GitHub](https://github.com/${github})
-or reach out via email at <${email}>
-`;
+  For questions please check [my GitHub](https://github.com/${answers.github})
+  or reach out via email at <${answers.email}>
+  `;
+  return readME;
 };
 
 module.exports = generateMarkdown;
-module.exports = renderLicenseBadge;
-module.exports = renderLicenseLink;
-module.exports = renderLicenseSection;
+// module.exports = renderLicenseBadge;
+// module.exports = renderLicenseLink;
+// module.exports = renderLicenseSection;
