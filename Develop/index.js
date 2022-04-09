@@ -149,9 +149,6 @@ const questions = [
         type: 'input',
         name: 'tests',
         message: 'What are the tests that can be run?',
-        when(answers) {
-            return answers.test_choice === 'yes'
-        }
     },
     //Questions (instructions for how to reach creator)
 
